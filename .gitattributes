@@ -1,0 +1,9 @@
+* text=auto
+*.F90 text eol=lf
+*.f90 text eol=lf
+Makefile text eol=lf
+*.mk text eol=lf
+make.inc text eol=lf
+# sample input data: keep byte-identical (SRC_001.DAT has CRLF line endings)
+examples/** -text
+*.pdf binary
