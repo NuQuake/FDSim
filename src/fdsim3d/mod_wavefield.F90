@@ -1,0 +1,36 @@
+!=======================================================================
+! Copyright (c) 2014 Jozef Kristek, Peter Moczo
+!
+! Licensed under the EUPL (the "Licence")
+! You may not use this work except in compliance with the Licence.
+! You may obtain a copy of the Licence at http://ec.europa.eu/idabc/eupl
+! Unless required by applicable law or agreed to in writing, software
+! distributed under the Licence is distributed on an "AS IS" basis,
+! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+! See the Licence for the specific language governing permissions and
+! limitations under the Licence.
+!
+! REVISION HISTORY:
+! Version 1.0, 2014-03-19: Jozef Kristek, Peter Moczo
+!=======================================================================
+
+MODULE WAVEFIELD
+  USE PRECISION, ONLY: PP
+  IMPLICIT NONE
+
+  REAL    (KIND=PP)  :: TOTAL_ENERGY
+
+  REAL    (KIND=PP), DIMENSION (:)    , ALLOCATABLE ::                 &
+                    SEISU, SEISV, SEISW
+
+  REAL    (KIND=PP), DIMENSION (:,:)  , ALLOCATABLE ::                 &
+                    SNAPU, SNAPV, SNAPW, SNAPUF, SNAPVF, SNAPWF
+
+  REAL    (KIND=PP), DIMENSION (:,:,:), ALLOCATABLE ::                 &
+                     UM, VM, WM, UMF, VMF, WMF
+
+  REAL    (KIND=PP), DIMENSION (:,:,:), ALLOCATABLE ::                 &
+                           XXX,   XYY,   XZZ,   XXZ,   XYZ,   XXY,     &
+                           XXXF,  XYYF,  XZZF,  XXZF,  XYZF,  XXYF
+
+END MODULE WAVEFIELD
