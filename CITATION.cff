@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use results obtained with this code, please cite it as below."
+title: "FDSim3D – The Fortran95 Code for Numerical Simulation of Seismic Wave Propagation in 3D Heterogeneous Viscoelastic Media"
+type: software
+version: "1.0"
+date-released: "2014-03-19"
+license: EUPL-1.2
+authors:
+  - family-names: Kristek
+    given-names: Jozef
+    affiliation: "Comenius University in Bratislava"
+  - family-names: Moczo
+    given-names: Peter
+    affiliation: "Comenius University in Bratislava"
+url: "https://www.cambridge.org/moczo"
+keywords:
+  - seismology
+  - finite-difference method
+  - wave propagation
+  - viscoelastic
+  - earthquake ground motion
+references:
+  - type: book
+    title: "The Finite-Difference Modelling of Earthquake Motions: Waves and Ruptures"
+    authors:
+      - family-names: Moczo
+        given-names: Peter
+      - family-names: Kristek
+        given-names: Jozef
+      - family-names: Gális
+        given-names: Martin
+    publisher:
+      name: "Cambridge University Press"
+    year: 2014

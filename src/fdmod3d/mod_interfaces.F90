@@ -1,0 +1,145 @@
+!=======================================================================
+! Copyright (c) 2014 Jozef Kristek, Peter Moczo, Martin Galis
+!
+! Licensed under the EUPL (the "Licence")
+! You may not use this work except in compliance with the Licence.
+! You may obtain a copy of the Licence at http://ec.europa.eu/idabc/eupl
+! Unless required by applicable law or agreed to in writing, software
+! distributed under the Licence is distributed on an "AS IS" basis,
+! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+! See the Licence for the specific language governing permissions and
+! limitations under the Licence.
+!
+! REVISION HISTORY:
+! Version 1.0, 2014-03-19: Jozef Kristek, Peter Moczo, Martin Galis
+!=======================================================================
+MODULE MOD_INTERFACES
+
+IMPLICIT NONE
+
+INTERFACE
+
+  SUBROUTINE     ADD_NEW_CELL_TYPE
+  END SUBROUTINE ADD_NEW_CELL_TYPE
+
+  SUBROUTINE     ALLOCATE_ARRAYS (WHICH_GRID)
+    INTEGER, INTENT(IN) :: WHICH_GRID
+  END SUBROUTINE ALLOCATE_ARRAYS
+
+  SUBROUTINE     CLOSE_FILES  (WHICH_GRID)
+    INTEGER, INTENT(IN) ::     WHICH_GRID
+  end SUBROUTINE CLOSE_FILES
+
+  SUBROUTINE     DEALLOCATE_ARRAYS
+  END SUBROUTINE DEALLOCATE_ARRAYS
+
+  SUBROUTINE     FILTER
+  END SUBROUTINE FILTER
+
+  SUBROUTINE     FIND_MAX_DEPTH
+  END SUBROUTINE FIND_MAX_DEPTH
+
+  FUNCTION     FUNC_MU_LA_RHO(X,Y,Z)
+    USE NRTYPE              , ONLY: WP
+    IMPLICIT NONE
+    REAL(WP), INTENT(IN) :: X,Y,Z
+    REAL(WP)             :: FUNC_MU_LA_RHO(3)
+  END FUNCTION FUNC_MU_LA_RHO
+
+  FUNCTION     FUNC_YMU_YL2M (XA,YA,ZA)
+    USE NRTYPE    , ONLY: WP
+    USE MOD_CONST , ONLY: N_FREQ
+    IMPLICIT NONE
+    REAL(WP), INTENT(IN)          :: XA,YA,ZA
+    REAL(WP), DIMENSION(N_FREQ,2) :: FUNC_YMU_YL2M
+  END FUNCTION FUNC_YMU_YL2M
+
+  FUNCTION     GET_LAYER (X,Y,Z)
+    USE NRTYPE   , ONLY: WP
+    IMPLICIT NONE
+    REAL(WP), INTENT(IN) :: X, Y, Z
+    INTEGER              :: GET_LAYER
+  END FUNCTION GET_LAYER
+
+  FUNCTION     GETDEPTH (X,Y,ninf)
+    USE NRTYPE   , ONLY: WP
+    IMPLICIT NONE
+    REAL(WP),INTENT(IN) :: X,Y
+    integer, intent(in) :: ninf
+    REAL(WP)            :: GETDEPTH
+  END FUNCTION GETDEPTH
+
+  FUNCTION     GET_FD_CELL_INDEX()
+    INTEGER :: GET_FD_CELL_INDEX
+  END FUNCTION GET_FD_CELL_INDEX
+
+  FUNCTION     INT3D (II,KI,LI,FIELD)
+    USE NRTYPE         , ONLY: WP
+    IMPLICIT NONE
+    INTEGER, INTENT(IN)  :: II, KI, LI
+    REAL(WP)             :: INT3D
+    REAL(WP), DIMENSION(:,:,:), INTENT(INOUT) :: FIELD
+  END FUNCTION INT3D
+
+  FUNCTION     IS_IN_1D_MEDIUM(X,Y,Z,WHICH_GRID)
+    USE NRTYPE        , ONLY: WP
+    IMPLICIT NONE
+    INTEGER,  INTENT(IN) :: WHICH_GRID
+    REAL(WP), INTENT(IN) :: X,Y,Z
+    LOGICAL              :: IS_IN_1D_MEDIUM
+  END FUNCTION IS_IN_1D_MEDIUM
+
+  SUBROUTINE     MODEL_LIN
+  END SUBROUTINE MODEL_LIN
+
+  SUBROUTINE     PARAMETERIZATION
+  END SUBROUTINE PARAMETERIZATION
+
+  SUBROUTINE     PREPARE_FINE_PAR (K1, MXT, NK, L, H, Z0)
+    USE NRTYPE         , ONLY: SP
+    IMPLICIT NONE
+    INTEGER , INTENT(IN) :: K1, MXT, NK, L
+    REAL(SP), INTENT(IN) :: H, Z0
+  END SUBROUTINE PREPARE_FINE_PAR
+
+  SUBROUTINE     PREPARE_FINE_PAR_Y (K1, MXT, NK, L, H, Z0)
+    USE NRTYPE         , ONLY: SP
+    IMPLICIT NONE
+    INTEGER , INTENT(IN) :: K1, MXT, NK, L
+    REAL(SP), INTENT(IN) :: H, Z0
+  END SUBROUTINE PREPARE_FINE_PAR_Y
+
+  SUBROUTINE     PRINT_INFO
+  END SUBROUTINE PRINT_INFO
+
+  SUBROUTINE     SETPARAMS
+  END SUBROUTINE SETPARAMS
+
+  LOGICAL FUNCTION TEST_CELLS( LAST_CELL, CELL )
+    USE NRTYPE              , ONLY: SP
+    USE MOD_CONST           , ONLY: N_E_PAR
+    IMPLICIT NONE
+    INTEGER ,                     INTENT(IN) :: LAST_CELL
+    REAL(SP), DIMENSION(N_E_PAR), INTENT(IN) :: CELL
+  END FUNCTION TEST_CELLS
+
+  LOGICAL FUNCTION TEST_CELLSY( LAST_CELL, CELLY )
+    USE NRTYPE              , ONLY: SP
+    USE MOD_CONST           , ONLY: N_Y_PAR, N_FREQ
+    IMPLICIT NONE
+    INTEGER ,                             INTENT(IN) :: LAST_CELL
+    REAL(SP), DIMENSION(N_Y_PAR, N_FREQ), INTENT(IN) :: CELLY
+  END FUNCTION TEST_CELLSY
+
+  SUBROUTINE     TEST_PARAMETERS
+  END SUBROUTINE TEST_PARAMETERS
+
+  SUBROUTINE     WRITE_GRD
+  END SUBROUTINE WRITE_GRD
+
+  SUBROUTINE     WRITE_PARAM
+  END SUBROUTINE WRITE_PARAM
+
+END INTERFACE
+
+END MODULE MOD_INTERFACES
