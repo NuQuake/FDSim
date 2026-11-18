@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [cmake, make]
+        mpi: [serial, mpi]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q gfortran
+          if [ "${{ matrix.mpi }}" = "mpi" ]; then sudo apt-get install -y -q libopenmpi-dev openmpi-bin; fi
+
+      - name: Build (CMake)
+        if: matrix.system == 'cmake'
+        run: |
+          MPI=$([ "${{ matrix.mpi }}" = "mpi" ] && echo ON || echo OFF)
+          cmake -S . -B build -DFDSIM_ENABLE_MPI=$MPI
+          cmake --build build -j
+          ls -l build/bin
+
+      - name: Build (make)
+        if: matrix.system == 'make'
+        run: |
+          MPI=$([ "${{ matrix.mpi }}" = "mpi" ] && echo 1 || echo 0)
+          make -j MPI=$MPI
+          ls -l bin
+
+      - name: Debug build (make)
+        if: matrix.system == 'make'
+        run: |
+          MPI=$([ "${{ matrix.mpi }}" = "mpi" ] && echo 1 || echo 0)
+          make -j MPI=$MPI DEBUG=1
