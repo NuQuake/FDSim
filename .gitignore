@@ -1,0 +1,35 @@
+# build trees
+/build*/
+/bin/
+*.o
+*.mod
+*.smod
+*.a
+*.so
+
+# simulation outputs (run directories / examples)
+*.LOG
+*.INM
+*.MO
+*.Q
+*.JMH
+*.JMHF
+*.MO[0-9][0-9][0-9]
+*.Q[0-9][0-9][0-9]
+*.JMH[0-9][0-9][0-9]
+*.JMHF[0-9][0-9][0-9]
+*.asc
+SNAP*_V*.DAT
+SNAP*.V*
+ENERGY.DAT
+SIGNAL.DAT
+ENVELOPE.DAT
+SPECTRUM.DAT
+/runs/
+
+# editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
